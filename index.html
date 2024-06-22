@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Todo List</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body ng-app="myApp" ng-controller="todoCtrl">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <div class="card shadow">
+          <div class="card-header text-white bg-primary">
+            <h2 class="text-center">My Todo List</h2>
+          </div>
+          <div class="card-body">
+            <form ng-submit="todoAdd()" class="form-inline justify-content-center">
+              <input type="text" ng-model="todoInput" class="form-control mr-2" placeholder="Add New">
+              <input type="submit" value="Add" class="btn btn-primary">
+            </form>
+            <br>
+            <ul class="list-group">
+              <li ng-repeat="x in todoList" class="list-group-item d-flex align-items-center justify-content-between">
+                <div>
+                  <input type="checkbox" ng-model="x.done"> 
+                  <span ng-hide="x.editing" ng-bind="x.todoText" ng-class="{'text-decoration-line-through': x.done}"></span>
+                  <input ng-show="x.editing" type="text" ng-model="x.todoText" class="form-control">
+                </div>
+                <div>
+                  <button ng-click="edit(x)" class="btn btn-warning btn-sm mr-2" ng-hide="x.editing">Edit</button>
+                  <button ng-click="save(x)" class="btn btn-success btn-sm mr-2" ng-show="x.editing">Save</button>
+                  <button ng-click="remove(x)" class="btn btn-danger btn-sm">Remove</button>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
